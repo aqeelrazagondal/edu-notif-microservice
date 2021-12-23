@@ -4,8 +4,8 @@ const { sendFBNotificationBulkNA } = require('../../functions/common/notificatio
 module.exports = async (req, res) => {
     try {
         // TODO - Batch wise to be implement in 2023
-        let roleId = req.body.data.roleId;
-        let text = req.body.data.text;
+        const roleId = req.body.data.roleId;
+        const text = req.body.data.text;
         let currentUsers = {};
         let msgString = "";
         let typeOfMsg = "";
@@ -64,12 +64,12 @@ module.exports = async (req, res) => {
             msgString = text;
             typeOfMsg = "EDU Admin Notification";
         }
-        let objects = [];
-        let userIds = [];
+        const objects = [];
+        const userIds = [];
         for (const iterator of currentUsers) {
             userIds.push(iterator.userId);
 
-            let notify = {
+            const notify = {
                 msgString,
                 read: 0,
                 type: typeOfMsg,
@@ -85,6 +85,7 @@ module.exports = async (req, res) => {
             };
             objects.push(notify);
         }
+
         sendFBNotificationBulkNA(msgString, userIds);
         model.notifications.bulkCreate(objects, { returning: true }) // will return all columns for each row inserted
             .then((result) => {
@@ -94,7 +95,7 @@ module.exports = async (req, res) => {
     }
     catch (err) {
         console.log("error: ", err)
-        res.send(406).send({
+        res.status(406).send({
             message: err.message
         })
     }
