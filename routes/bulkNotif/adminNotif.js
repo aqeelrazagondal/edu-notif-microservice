@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
                 attributes: ["id", "userId"],
             });
             msgString = text;
-            typeOfMsg = "EDU Admin Notification";
+            typeOfMsg = "EduOpenings Admin";
         } else if (roleId == 3 || roleId == 7) {  // for all employees
             currentUsers = await model.edu_employee.findAll({
                 include: [
@@ -44,7 +44,7 @@ module.exports = async (req, res) => {
                 attributes: ["id", "userId"],
             });
             msgString = text;
-            typeOfMsg = "EDU Admin Notification";
+            typeOfMsg = "EduOpenings Admin";
         } else if (roleId == 4 || roleId == 8) { // for all service providers
             currentUsers = await model.edu_service_provider.findAll({
                 include: [
@@ -62,7 +62,7 @@ module.exports = async (req, res) => {
                 attributes: ["id", "userId"],
             });
             msgString = text;
-            typeOfMsg = "EDU Admin Notification";
+            typeOfMsg = "EduOpenings Admin";
         }
         const objects = [];
         const userIds = [];
